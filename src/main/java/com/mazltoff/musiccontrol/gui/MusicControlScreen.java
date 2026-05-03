@@ -102,7 +102,7 @@ public class MusicControlScreen extends Screen {
                 this.font,
                 this.title,
                 this.width / 2,
-                12,
+                40,
                 0xFFFFFF
         );
 
@@ -110,7 +110,7 @@ public class MusicControlScreen extends Screen {
                 this.font,
                 getStatusText(),
                 this.width / 2,
-                26,
+                54,
                 0xA0A0A0
         );
 
@@ -118,7 +118,7 @@ public class MusicControlScreen extends Screen {
                 this.font,
                 getPlaybackStateText(),
                 this.width / 2,
-                38,
+                68,
                 0xA0A0A0
         );
 
