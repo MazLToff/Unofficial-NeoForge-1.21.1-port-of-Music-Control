@@ -9,10 +9,11 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import org.lwjgl.glfw.GLFW;
 import com.mazltoff.musiccontrol.categories.MusicCategories;
+import com.mazltoff.musiccontrol.Utils;
+import com.mazltoff.musiccontrol.config.MusicControlConfig;
 
 public final class MusicControlKeyMappings {
     private static final String CATEGORY = "key.categories.music_control";
-    private static final int VOLUME_INCREMENT = 5;
 
     private static final KeyMapping PREVIOUS_MUSIC = new KeyMapping(
             "key.music_control.previousMusic",
@@ -153,11 +154,11 @@ public final class MusicControlKeyMappings {
         }
 
         while (VOLUME_UP.consumeClick()) {
-            changeMusicVolume(minecraft, VOLUME_INCREMENT);
+            changeMusicVolume(minecraft, MusicControlConfig.getVolumeIncrement());
         }
 
         while (VOLUME_DOWN.consumeClick()) {
-            changeMusicVolume(minecraft, -VOLUME_INCREMENT);
+            changeMusicVolume(minecraft, -MusicControlConfig.getVolumeIncrement());
         }
 
         while (OPEN_MENU.consumeClick()) {
@@ -177,8 +178,6 @@ public final class MusicControlKeyMappings {
     }
 
     private static void print(Minecraft minecraft, Component message) {
-        if (minecraft.player != null) {
-            minecraft.player.displayClientMessage(message, true);
-        }
+        Utils.print(minecraft, message);
     }
 }

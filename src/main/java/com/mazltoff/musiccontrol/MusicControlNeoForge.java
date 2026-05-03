@@ -1,12 +1,16 @@
 package com.mazltoff.musiccontrol;
 
 import com.mazltoff.musiccontrol.categories.MusicCategories;
+import com.mazltoff.musiccontrol.client.MusicControlClient;
 import com.mazltoff.musiccontrol.client.MusicControlKeyMappings;
 import com.mazltoff.musiccontrol.client.SoundEventRegistry;
+import com.mazltoff.musiccontrol.config.MusicControlConfig;
 import com.mojang.logging.LogUtils;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
@@ -15,8 +19,12 @@ public class MusicControlNeoForge {
     public static final String MODID = "music_control";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public MusicControlNeoForge(IEventBus modBus) {
+    public MusicControlNeoForge(IEventBus modBus, ModContainer modContainer) {
+        modContainer.registerConfig(ModConfig.Type.CLIENT, MusicControlConfig.SPEC);
+
         SoundEventRegistry.init();
+
+        MusicControlClient.currentCategory = MusicControlConfig.getStartCategory();
         MusicCategories.initBasic();
 
         modBus.addListener(MusicControlKeyMappings::register);

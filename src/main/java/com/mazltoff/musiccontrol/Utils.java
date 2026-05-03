@@ -1,5 +1,6 @@
 package com.mazltoff.musiccontrol;
 
+import com.mazltoff.musiccontrol.config.MusicControlConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
@@ -9,6 +10,10 @@ public final class Utils {
     }
 
     public static void print(Minecraft minecraft, Component text) {
+        if (!MusicControlConfig.shouldShowActionBarMessages()) {
+            return;
+        }
+
         if (minecraft.player != null) {
             minecraft.player.displayClientMessage(text, true);
         }
