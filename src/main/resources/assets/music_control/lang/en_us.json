@@ -34,11 +34,19 @@
   "music_control.message.stopped": "Music stopped",
 
   "screen.music_control.title": "Music Control",
+  "screen.music_control.previous_category": "Previous Category",
+  "screen.music_control.next_category": "Next Category",
   "screen.music_control.previous": "Previous Music",
   "screen.music_control.next": "Next Music",
   "screen.music_control.pause": "Pause / Resume",
   "screen.music_control.loop": "Loop Music",
   "screen.music_control.current": "Show Current Music",
+  "screen.music_control.stop": "Stop Music",
   "screen.music_control.close": "Close",
-  "screen.music_control.status": "Category: %s | Music: %s"
+  "screen.music_control.status": "Category: %s | Music: %s",
+  "screen.music_control.playback_state": "State: %s | %s",
+  "screen.music_control.paused": "Paused",
+  "screen.music_control.playing": "Playing",
+  "screen.music_control.loop_enabled": "Loop ON",
+  "screen.music_control.loop_disabled": "Loop OFF"
 }

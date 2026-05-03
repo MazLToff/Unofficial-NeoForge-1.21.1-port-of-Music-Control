@@ -30,6 +30,11 @@ public final class MusicPlaybackController {
         loopReplayCooldownTicks = 0;
     }
 
+    public static void stopMusic(Minecraft minecraft) {
+        stopManualMusic(minecraft);
+        Utils.print(minecraft, Component.translatable("music_control.message.stopped"));
+    }
+
     public static void tick(Minecraft minecraft) {
         if (loopReplayCooldownTicks > 0) {
             loopReplayCooldownTicks--;
