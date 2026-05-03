@@ -9,5 +9,10 @@
   "key.music_control.print": "Display Current Music",
   "key.music_control.volumeUp": "Music Volume Up",
   "key.music_control.volumeDown": "Music Volume Down",
-  "key.music_control.openMenu": "Open Music Control Menu"
+  "key.music_control.openMenu": "Open Music Control Menu",
+
+  "music.format.biome": "%s music",
+  "music.format.dimension": "%s dimension music",
+  "music.format.disc": "%s music disc",
+  "music.format.misc": "%s music"
 }
