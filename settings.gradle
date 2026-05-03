@@ -1,31 +1,16 @@
 pluginManagement {
     repositories {
-        maven {
-            name = 'Saps Mirror'
-            url = uri('https://maven.saps.dev/static/mirror/')
-        }
+        gradlePluginPortal()
         maven {
             name = 'NeoForged'
             url = uri('https://maven.neoforged.net/releases')
         }
-        gradlePluginPortal()
         mavenCentral()
     }
 }
 
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        maven {
-            name = 'Saps Mirror'
-            url = uri('https://maven.saps.dev/static/mirror/')
-        }
-        maven {
-            name = 'NeoForged'
-            url = uri('https://maven.neoforged.net/releases')
-        }
-        mavenCentral()
-    }
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
 }
 
 rootProject.name = 'music-control-neoforge'
