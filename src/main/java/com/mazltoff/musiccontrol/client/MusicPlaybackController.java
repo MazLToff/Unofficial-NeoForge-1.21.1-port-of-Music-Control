@@ -31,6 +31,12 @@ public final class MusicPlaybackController {
         MusicControlClient.pauseResume = true;
         MusicControlClient.isPaused = !MusicControlClient.isPaused;
 
+        if (MusicControlClient.isPaused) {
+            MinecraftMusicAccess.stopCurrentMusic(minecraft);
+        } else {
+            MinecraftMusicAccess.setNextSongDelay(minecraft, 0);
+        }
+
         Utils.print(
                 minecraft,
                 Component.translatable(
