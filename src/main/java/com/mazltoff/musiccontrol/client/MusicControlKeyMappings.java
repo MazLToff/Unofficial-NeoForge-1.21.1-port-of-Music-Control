@@ -11,6 +11,8 @@ import org.lwjgl.glfw.GLFW;
 import com.mazltoff.musiccontrol.categories.MusicCategories;
 import com.mazltoff.musiccontrol.Utils;
 import com.mazltoff.musiccontrol.config.MusicControlConfig;
+import com.mazltoff.musiccontrol.categories.Music;
+import com.mazltoff.musiccontrol.categories.MusicLibrary;
 
 public final class MusicControlKeyMappings {
     private static final String CATEGORY = "key.categories.music_control";
@@ -106,12 +108,26 @@ public final class MusicControlKeyMappings {
 
         while (PREVIOUS_MUSIC.consumeClick()) {
             MusicControlClient.previousMusic = true;
-            print(minecraft, Component.literal("Previous music"));
+            Music selected = MusicLibrary.selectMusic(false);
+
+            print(
+                    minecraft,
+                    selected == null
+                            ? Component.translatable("music_control.message.no_music_available")
+                            : Component.translatable("music_control.message.selected_music", Music.getTranslatedText(selected.getIdentifier()))
+            );
         }
 
         while (NEXT_MUSIC.consumeClick()) {
             MusicControlClient.nextMusic = true;
-            print(minecraft, Component.literal("Next music"));
+            Music selected = MusicLibrary.selectMusic(true);
+
+            print(
+                    minecraft,
+                    selected == null
+                            ? Component.translatable("music_control.message.no_music_available")
+                            : Component.translatable("music_control.message.selected_music", Music.getTranslatedText(selected.getIdentifier()))
+            );
         }
 
         while (PAUSE_RESUME.consumeClick()) {
@@ -127,6 +143,8 @@ public final class MusicControlKeyMappings {
         while (PREVIOUS_CATEGORY.consumeClick()) {
             MusicControlClient.previousCategory = true;
             MusicCategories.changeCategory(false);
+            MusicControlClient.musicSelected = null;
+
             print(
                     minecraft,
                     Component.translatable(
@@ -139,6 +157,8 @@ public final class MusicControlKeyMappings {
         while (NEXT_CATEGORY.consumeClick()) {
             MusicControlClient.nextCategory = true;
             MusicCategories.changeCategory(true);
+            MusicControlClient.musicSelected = null;
+
             print(
                     minecraft,
                     Component.translatable(
@@ -150,7 +170,10 @@ public final class MusicControlKeyMappings {
 
         while (PRINT_MUSIC.consumeClick()) {
             MusicControlClient.printMusic = true;
-            print(minecraft, Component.literal("Current music: unknown yet"));
+            print(
+                    minecraft,
+                    Component.translatable("music_control.message.current_music", MusicLibrary.getSelectedMusicText())
+            );
         }
 
         while (VOLUME_UP.consumeClick()) {

@@ -20,5 +20,9 @@
   "music.category.default": "Default music",
   "music.category.disc": "Music discs",
 
-  "music_control.message.category": "Music category: %s"
+  "music_control.message.category": "Music category: %s",
+  "music_control.message.selected_music": "Selected music: %s",
+  "music_control.message.current_music": "Current music: %s",
+  "music_control.message.no_music_selected": "No music selected",
+  "music_control.message.no_music_available": "No music available"
 }
