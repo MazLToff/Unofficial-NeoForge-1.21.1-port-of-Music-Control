@@ -10,7 +10,38 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 
 public final class MusicPlaybackController {
+    private static int loopReplayCooldownTicks = 0;
+
     private MusicPlaybackController() {
+    }
+
+    public static void tick(Minecraft minecraft) {
+        if (loopReplayCooldownTicks > 0) {
+            loopReplayCooldownTicks--;
+        }
+
+        if (!MusicControlClient.loopMusic) {
+            return;
+        }
+
+        if (MusicControlClient.isPaused) {
+            return;
+        }
+
+        if (MusicControlClient.musicSelected == null) {
+            return;
+        }
+
+        if (MinecraftMusicAccess.isCurrentMusicActive(minecraft)) {
+            return;
+        }
+
+        if (loopReplayCooldownTicks > 0) {
+            return;
+        }
+
+        MinecraftMusicAccess.playMusic(minecraft, MusicControlClient.musicSelected);
+        loopReplayCooldownTicks = 20;
     }
 
     public static void previousMusic(Minecraft minecraft) {
@@ -21,6 +52,7 @@ public final class MusicPlaybackController {
         if (selected != null) {
             MinecraftMusicAccess.playMusic(minecraft, selected.getIdentifier());
             MusicControlClient.isPaused = false;
+            loopReplayCooldownTicks = 20;
         }
 
         printSelectedMusic(minecraft, selected);
@@ -34,6 +66,7 @@ public final class MusicPlaybackController {
         if (selected != null) {
             MinecraftMusicAccess.playMusic(minecraft, selected.getIdentifier());
             MusicControlClient.isPaused = false;
+            loopReplayCooldownTicks = 20;
         }
 
         printSelectedMusic(minecraft, selected);

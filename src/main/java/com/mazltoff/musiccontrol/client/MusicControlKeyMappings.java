@@ -100,6 +100,8 @@ public final class MusicControlKeyMappings {
     public static void onClientTick(ClientTickEvent.Post event) {
         Minecraft minecraft = Minecraft.getInstance();
 
+        MusicPlaybackController.tick(minecraft);
+
         while (PREVIOUS_MUSIC.consumeClick()) {
             MusicPlaybackController.previousMusic(minecraft);
         }

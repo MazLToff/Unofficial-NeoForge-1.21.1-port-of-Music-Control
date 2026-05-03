@@ -20,6 +20,12 @@ public final class MinecraftMusicAccess {
         return getCurrentMusic(minecraft) != null;
     }
 
+    public static boolean isCurrentMusicActive(Minecraft minecraft) {
+        SoundInstance currentMusic = getCurrentMusic(minecraft);
+
+        return currentMusic != null && minecraft.getSoundManager().isActive(currentMusic);
+    }
+
     public static int getNextSongDelay(Minecraft minecraft) {
         return accessor(minecraft).musiccontrol$getNextSongDelay();
     }
