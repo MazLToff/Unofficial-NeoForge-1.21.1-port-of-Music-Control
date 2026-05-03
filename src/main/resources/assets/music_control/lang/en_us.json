@@ -1,4 +1,13 @@
 {
   "key.categories.music_control": "Music Control",
-  "key.music_control.open_menu": "Open Music Control"
+  "key.music_control.previousMusic": "Previous Music",
+  "key.music_control.nextMusic": "Next Music",
+  "key.music_control.pause": "Pause / Resume Music",
+  "key.music_control.loop": "Loop Music",
+  "key.music_control.previousCategory": "Previous Music Category",
+  "key.music_control.nextCategory": "Next Music Category",
+  "key.music_control.print": "Display Current Music",
+  "key.music_control.volumeUp": "Music Volume Up",
+  "key.music_control.volumeDown": "Music Volume Down",
+  "key.music_control.openMenu": "Open Music Control Menu"
 }
