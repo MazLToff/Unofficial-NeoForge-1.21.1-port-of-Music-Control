@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package com.mazltoff.musiccontrol;
 
 import org.slf4j.Logger;
 
@@ -32,8 +32,8 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
-@Mod(ExampleMod.MODID)
-public class ExampleMod {
+@Mod(MusicControlNeoForge.MODID)
+public class MusicControlNeoForge {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "examplemod";
     // Directly reference a slf4j logger
