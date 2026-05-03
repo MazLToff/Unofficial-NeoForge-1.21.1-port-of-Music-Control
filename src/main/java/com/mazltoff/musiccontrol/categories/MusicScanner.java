@@ -34,13 +34,6 @@ public final class MusicScanner {
         }
 
         scanned = true;
-
-        if (MusicControlConfig.debugLogging()) {
-            MusicControlNeoForge.LOGGER.info(
-                    "Music Control scanned {} music sound events",
-                    MUSIC_BY_NAMESPACE.getOrDefault(ALL_MUSICS, new HashSet<>()).size()
-            );
-        }
     }
 
     private static boolean isMusicSound(ResourceLocation soundId) {
