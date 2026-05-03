@@ -1,18 +1,12 @@
 package com.mazltoff.musiccontrol.client;
 
+import com.mazltoff.musiccontrol.config.MusicControlConfig;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundSource;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import org.lwjgl.glfw.GLFW;
-import com.mazltoff.musiccontrol.categories.MusicCategories;
-import com.mazltoff.musiccontrol.Utils;
-import com.mazltoff.musiccontrol.config.MusicControlConfig;
-import com.mazltoff.musiccontrol.categories.Music;
-import com.mazltoff.musiccontrol.categories.MusicLibrary;
 
 public final class MusicControlKeyMappings {
     private static final String CATEGORY = "key.categories.music_control";
@@ -107,100 +101,49 @@ public final class MusicControlKeyMappings {
         Minecraft minecraft = Minecraft.getInstance();
 
         while (PREVIOUS_MUSIC.consumeClick()) {
-            MusicControlClient.previousMusic = true;
-            Music selected = MusicLibrary.selectMusic(false);
-
-            print(
-                    minecraft,
-                    selected == null
-                            ? Component.translatable("music_control.message.no_music_available")
-                            : Component.translatable("music_control.message.selected_music", Music.getTranslatedText(selected.getIdentifier()))
-            );
+            MusicPlaybackController.previousMusic(minecraft);
         }
 
         while (NEXT_MUSIC.consumeClick()) {
-            MusicControlClient.nextMusic = true;
-            Music selected = MusicLibrary.selectMusic(true);
-
-            print(
-                    minecraft,
-                    selected == null
-                            ? Component.translatable("music_control.message.no_music_available")
-                            : Component.translatable("music_control.message.selected_music", Music.getTranslatedText(selected.getIdentifier()))
-            );
+            MusicPlaybackController.nextMusic(minecraft);
         }
 
         while (PAUSE_RESUME.consumeClick()) {
-            MusicControlClient.pauseResume = true;
-            print(minecraft, Component.literal("Pause / resume music"));
+            MusicPlaybackController.togglePause(minecraft);
         }
 
         while (LOOP_MUSIC.consumeClick()) {
-            MusicControlClient.loopMusic = !MusicControlClient.loopMusic;
-            print(minecraft, Component.literal(MusicControlClient.loopMusic ? "Loop music: ON" : "Loop music: OFF"));
+            MusicPlaybackController.toggleLoop(minecraft);
         }
 
         while (PREVIOUS_CATEGORY.consumeClick()) {
-            MusicControlClient.previousCategory = true;
-            MusicCategories.changeCategory(false);
-            MusicControlClient.musicSelected = null;
-
-            print(
-                    minecraft,
-                    Component.translatable(
-                            "music_control.message.category",
-                            MusicCategories.getCurrentCategoryText()
-                    )
-            );
+            MusicPlaybackController.previousCategory(minecraft);
         }
 
         while (NEXT_CATEGORY.consumeClick()) {
-            MusicControlClient.nextCategory = true;
-            MusicCategories.changeCategory(true);
-            MusicControlClient.musicSelected = null;
-
-            print(
-                    minecraft,
-                    Component.translatable(
-                            "music_control.message.category",
-                            MusicCategories.getCurrentCategoryText()
-                    )
-            );
+            MusicPlaybackController.nextCategory(minecraft);
         }
 
         while (PRINT_MUSIC.consumeClick()) {
-            MusicControlClient.printMusic = true;
-            print(
-                    minecraft,
-                    Component.translatable("music_control.message.current_music", MusicLibrary.getSelectedMusicText())
-            );
+            MusicPlaybackController.printCurrentMusic(minecraft);
         }
 
         while (VOLUME_UP.consumeClick()) {
-            changeMusicVolume(minecraft, MusicControlConfig.getVolumeIncrement());
+            MusicPlaybackController.changeMusicVolume(
+                    minecraft,
+                    MusicControlConfig.getVolumeIncrement()
+            );
         }
 
         while (VOLUME_DOWN.consumeClick()) {
-            changeMusicVolume(minecraft, -MusicControlConfig.getVolumeIncrement());
+            MusicPlaybackController.changeMusicVolume(
+                    minecraft,
+                    -MusicControlConfig.getVolumeIncrement()
+            );
         }
 
         while (OPEN_MENU.consumeClick()) {
-            print(minecraft, Component.literal("Music Control menu is not ported yet"));
+            MusicPlaybackController.openMenuPlaceholder(minecraft);
         }
-    }
-
-    private static void changeMusicVolume(Minecraft minecraft, int delta) {
-        float current = minecraft.options.getSoundSourceVolume(SoundSource.MUSIC);
-        int volume = Math.round(current * 100.0F);
-        volume = Math.max(0, Math.min(100, volume + delta));
-
-        minecraft.options.getSoundSourceOptionInstance(SoundSource.MUSIC).set(volume / 100.0);
-        minecraft.options.save();
-
-        print(minecraft, Component.literal("Music volume: " + volume + "%"));
-    }
-
-    private static void print(Minecraft minecraft, Component message) {
-        Utils.print(minecraft, message);
     }
 }

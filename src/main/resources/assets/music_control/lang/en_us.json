@@ -24,5 +24,11 @@
   "music_control.message.selected_music": "Selected music: %s",
   "music_control.message.current_music": "Current music: %s",
   "music_control.message.no_music_selected": "No music selected",
-  "music_control.message.no_music_available": "No music available"
+  "music_control.message.no_music_available": "No music available",
+  "music_control.message.pause_on": "Music paused",
+  "music_control.message.pause_off": "Music resumed",
+  "music_control.message.loop_on": "Loop music: ON",
+  "music_control.message.loop_off": "Loop music: OFF",
+  "music_control.message.volume": "Music volume: %s%%",
+  "music_control.message.menu_not_ported": "Music Control menu is not ported yet"
 }
