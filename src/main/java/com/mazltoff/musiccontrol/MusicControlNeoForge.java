@@ -14,6 +14,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 import com.mazltoff.musiccontrol.categories.MusicLibrary;
+import com.mazltoff.musiccontrol.categories.MusicScanner;
 
 @Mod(value = MusicControlNeoForge.MODID, dist = Dist.CLIENT)
 public class MusicControlNeoForge {
@@ -24,9 +25,11 @@ public class MusicControlNeoForge {
         modContainer.registerConfig(ModConfig.Type.CLIENT, MusicControlConfig.SPEC);
 
         SoundEventRegistry.init();
+
         MusicControlClient.currentCategory = MusicControlConfig.getStartCategory();
         MusicCategories.initBasic();
         MusicLibrary.init();
+        MusicScanner.scanBuiltInSoundEvents();
 
         modBus.addListener(MusicControlKeyMappings::register);
         NeoForge.EVENT_BUS.addListener(MusicControlKeyMappings::onClientTick);

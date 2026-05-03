@@ -164,5 +164,6 @@ public final class MusicLibrary {
 
         MUSIC_BY_NAMESPACE.computeIfAbsent(category, ignored -> new HashSet<>()).add(music);
         MUSIC_BY_NAMESPACE.computeIfAbsent(ALL_MUSICS, ignored -> new HashSet<>()).add(music);
+        MUSIC_BY_NAMESPACE.computeIfAbsent("minecraft", ignored -> new HashSet<>()).add(music);
     }
 }
