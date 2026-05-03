@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundSource;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import org.lwjgl.glfw.GLFW;
+import com.mazltoff.musiccontrol.categories.MusicCategories;
 
 public final class MusicControlKeyMappings {
     private static final String CATEGORY = "key.categories.music_control";
@@ -124,12 +125,26 @@ public final class MusicControlKeyMappings {
 
         while (PREVIOUS_CATEGORY.consumeClick()) {
             MusicControlClient.previousCategory = true;
-            print(minecraft, Component.literal("Previous music category"));
+            MusicCategories.changeCategory(false);
+            print(
+                    minecraft,
+                    Component.translatable(
+                            "music_control.message.category",
+                            MusicCategories.getCurrentCategoryText()
+                    )
+            );
         }
 
         while (NEXT_CATEGORY.consumeClick()) {
             MusicControlClient.nextCategory = true;
-            print(minecraft, Component.literal("Next music category"));
+            MusicCategories.changeCategory(true);
+            print(
+                    minecraft,
+                    Component.translatable(
+                            "music_control.message.category",
+                            MusicCategories.getCurrentCategoryText()
+                    )
+            );
         }
 
         while (PRINT_MUSIC.consumeClick()) {

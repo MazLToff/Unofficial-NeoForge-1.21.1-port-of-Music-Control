@@ -14,5 +14,11 @@
   "music.format.biome": "%s music",
   "music.format.dimension": "%s dimension music",
   "music.format.disc": "%s music disc",
-  "music.format.misc": "%s music"
+  "music.format.misc": "%s music",
+
+  "music.category.all": "All music",
+  "music.category.default": "Default music",
+  "music.category.disc": "Music discs",
+
+  "music_control.message.category": "Music category: %s"
 }

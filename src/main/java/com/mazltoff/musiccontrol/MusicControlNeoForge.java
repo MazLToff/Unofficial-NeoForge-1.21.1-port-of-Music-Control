@@ -1,5 +1,6 @@
 package com.mazltoff.musiccontrol;
 
+import com.mazltoff.musiccontrol.categories.MusicCategories;
 import com.mazltoff.musiccontrol.client.MusicControlKeyMappings;
 import com.mojang.logging.LogUtils;
 import net.neoforged.api.distmarker.Dist;
@@ -14,6 +15,8 @@ public class MusicControlNeoForge {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public MusicControlNeoForge(IEventBus modBus) {
+        MusicCategories.initBasic();
+
         modBus.addListener(MusicControlKeyMappings::register);
         NeoForge.EVENT_BUS.addListener(MusicControlKeyMappings::onClientTick);
 
