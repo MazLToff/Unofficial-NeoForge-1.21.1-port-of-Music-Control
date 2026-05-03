@@ -8,11 +8,25 @@ import com.mazltoff.musiccontrol.config.MusicControlConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.resources.ResourceLocation;
 
 public final class MusicPlaybackController {
     private static int loopReplayCooldownTicks = 0;
 
     private MusicPlaybackController() {
+    }
+
+    public static void clearSelectedMusic() {
+        MusicControlClient.musicSelected = null;
+        loopReplayCooldownTicks = 0;
+    }
+
+    public static void stopManualMusic(Minecraft minecraft) {
+        MinecraftMusicAccess.stopCurrentMusic(minecraft);
+        MusicControlClient.currentMusic = null;
+        MusicControlClient.musicSelected = null;
+        MusicControlClient.isPaused = false;
+        loopReplayCooldownTicks = 0;
     }
 
     public static void tick(Minecraft minecraft) {
@@ -111,7 +125,7 @@ public final class MusicPlaybackController {
 
     public static void previousCategory(Minecraft minecraft) {
         MusicControlClient.previousCategory = true;
-        MusicControlClient.musicSelected = null;
+        clearSelectedMusic();
 
         MusicCategories.changeCategory(false);
 
@@ -126,7 +140,7 @@ public final class MusicPlaybackController {
 
     public static void nextCategory(Minecraft minecraft) {
         MusicControlClient.nextCategory = true;
-        MusicControlClient.musicSelected = null;
+        clearSelectedMusic();
 
         MusicCategories.changeCategory(true);
 
@@ -142,11 +156,21 @@ public final class MusicPlaybackController {
     public static void printCurrentMusic(Minecraft minecraft) {
         MusicControlClient.printMusic = true;
 
+        ResourceLocation currentMusicId = MinecraftMusicAccess.getCurrentMusicId(minecraft);
+
+        Component musicText;
+
+        if (currentMusicId != null) {
+            musicText = Music.getTranslatedText(currentMusicId);
+        } else {
+            musicText = MusicLibrary.getSelectedMusicText();
+        }
+
         Utils.print(
                 minecraft,
                 Component.translatable(
                         "music_control.message.current_music",
-                        MusicLibrary.getSelectedMusicText()
+                        musicText
                 )
         );
     }

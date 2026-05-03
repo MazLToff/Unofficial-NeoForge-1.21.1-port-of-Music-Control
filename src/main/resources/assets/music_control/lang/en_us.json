@@ -30,5 +30,6 @@
   "music_control.message.loop_on": "Loop music: ON",
   "music_control.message.loop_off": "Loop music: OFF",
   "music_control.message.volume": "Music volume: %s%%",
-  "music_control.message.menu_not_ported": "Music Control menu is not ported yet"
+  "music_control.message.menu_not_ported": "Music Control menu is not ported yet",
+  "music_control.message.stopped": "Music stopped"
 }

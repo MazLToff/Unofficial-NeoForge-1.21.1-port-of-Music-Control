@@ -7,6 +7,7 @@ import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import org.jetbrains.annotations.Nullable;
 
 public final class MinecraftMusicAccess {
     private MinecraftMusicAccess() {
@@ -24,6 +25,17 @@ public final class MinecraftMusicAccess {
         SoundInstance currentMusic = getCurrentMusic(minecraft);
 
         return currentMusic != null && minecraft.getSoundManager().isActive(currentMusic);
+    }
+
+    @Nullable
+    public static ResourceLocation getCurrentMusicId(Minecraft minecraft) {
+        SoundInstance currentMusic = getCurrentMusic(minecraft);
+
+        if (currentMusic == null) {
+            return null;
+        }
+
+        return currentMusic.getLocation();
     }
 
     public static int getNextSongDelay(Minecraft minecraft) {
