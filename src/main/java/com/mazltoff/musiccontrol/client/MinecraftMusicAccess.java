@@ -2,8 +2,11 @@ package com.mazltoff.musiccontrol.client;
 
 import com.mazltoff.musiccontrol.mixin.MusicManagerAccessor;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.MusicManager;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 
 public final class MinecraftMusicAccess {
     private MinecraftMusicAccess() {
@@ -27,6 +30,23 @@ public final class MinecraftMusicAccess {
 
     public static void stopCurrentMusic(Minecraft minecraft) {
         accessor(minecraft).musiccontrol$invokeStopPlaying();
+        accessor(minecraft).musiccontrol$setCurrentMusic(null);
+    }
+
+    public static void playMusic(Minecraft minecraft, ResourceLocation musicId) {
+        if (musicId == null) {
+            return;
+        }
+
+        stopCurrentMusic(minecraft);
+
+        SoundEvent soundEvent = SoundEvent.createVariableRangeEvent(musicId);
+        SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent);
+
+        minecraft.getSoundManager().play(soundInstance);
+
+        accessor(minecraft).musiccontrol$setCurrentMusic(soundInstance);
+        accessor(minecraft).musiccontrol$setNextSongDelay(Integer.MAX_VALUE);
     }
 
     private static MusicManagerAccessor accessor(Minecraft minecraft) {

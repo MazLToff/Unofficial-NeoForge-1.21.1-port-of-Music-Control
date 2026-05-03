@@ -17,6 +17,12 @@ public final class MusicPlaybackController {
         MusicControlClient.previousMusic = true;
 
         Music selected = MusicLibrary.selectMusic(false);
+
+        if (selected != null) {
+            MinecraftMusicAccess.playMusic(minecraft, selected.getIdentifier());
+            MusicControlClient.isPaused = false;
+        }
+
         printSelectedMusic(minecraft, selected);
     }
 
@@ -24,6 +30,12 @@ public final class MusicPlaybackController {
         MusicControlClient.nextMusic = true;
 
         Music selected = MusicLibrary.selectMusic(true);
+
+        if (selected != null) {
+            MinecraftMusicAccess.playMusic(minecraft, selected.getIdentifier());
+            MusicControlClient.isPaused = false;
+        }
+
         printSelectedMusic(minecraft, selected);
     }
 
@@ -49,6 +61,10 @@ public final class MusicPlaybackController {
 
     public static void toggleLoop(Minecraft minecraft) {
         MusicControlClient.loopMusic = !MusicControlClient.loopMusic;
+
+        if (MusicControlClient.loopMusic && MusicControlClient.musicSelected != null) {
+            MinecraftMusicAccess.setNextSongDelay(minecraft, Integer.MAX_VALUE);
+        }
 
         Utils.print(
                 minecraft,
