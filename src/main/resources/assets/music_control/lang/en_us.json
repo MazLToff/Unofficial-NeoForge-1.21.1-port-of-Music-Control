@@ -31,5 +31,14 @@
   "music_control.message.loop_off": "Loop music: OFF",
   "music_control.message.volume": "Music volume: %s%%",
   "music_control.message.menu_not_ported": "Music Control menu is not ported yet",
-  "music_control.message.stopped": "Music stopped"
+  "music_control.message.stopped": "Music stopped",
+
+  "screen.music_control.title": "Music Control",
+  "screen.music_control.previous": "Previous Music",
+  "screen.music_control.next": "Next Music",
+  "screen.music_control.pause": "Pause / Resume",
+  "screen.music_control.loop": "Loop Music",
+  "screen.music_control.current": "Show Current Music",
+  "screen.music_control.close": "Close",
+  "screen.music_control.status": "Category: %s | Music: %s"
 }

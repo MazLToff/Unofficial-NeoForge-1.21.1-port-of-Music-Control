@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.resources.ResourceLocation;
+import com.mazltoff.musiccontrol.gui.MusicControlScreen;
 
 public final class MusicPlaybackController {
     private static int loopReplayCooldownTicks = 0;
@@ -176,7 +177,7 @@ public final class MusicPlaybackController {
     }
 
     public static void openMenuPlaceholder(Minecraft minecraft) {
-        Utils.print(minecraft, Component.translatable("music_control.message.menu_not_ported"));
+        minecraft.setScreen(new MusicControlScreen());
     }
 
     public static void changeMusicVolume(Minecraft minecraft, int delta) {
