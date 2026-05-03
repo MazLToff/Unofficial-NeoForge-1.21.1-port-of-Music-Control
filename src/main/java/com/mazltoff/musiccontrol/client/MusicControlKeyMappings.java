@@ -155,7 +155,7 @@ public final class MusicControlKeyMappings {
         int volume = Math.round(current * 100.0F);
         volume = Math.max(0, Math.min(100, volume + delta));
 
-        minecraft.options.setSoundCategoryVolume(SoundSource.MUSIC, volume / 100.0F);
+        minecraft.options.getSoundSourceOptionInstance(SoundSource.MUSIC).set(volume / 100.0);
         minecraft.options.save();
 
         print(minecraft, Component.literal("Music volume: " + volume + "%"));
